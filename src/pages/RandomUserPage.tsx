@@ -3,13 +3,12 @@ import { cleanUser } from "../libs/CleanUser";
 import axios from "axios";
 import { useState } from "react";
 export default function RandomUserPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<ReturnType<typeof cleanUser>[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [genAmount, setGenAmount] = useState(() => {
     const saved = localStorage.getItem("genAmount");
     return saved ? Number(saved) : 1;
   });
-
   const generateBtnOnClick = async () => {
     setIsLoading(true);
     const resp = await axios.get(
